@@ -1,0 +1,64 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
+import { fetchAllMissions } from '../../../redux/slice/componentSlice';
+import Mission from '../mission/Mission';
+import styles from './missionContainerStyle.module.scss';
+
+const container = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const MissionContainer = (props) => {
+  const { allItems } = props;
+  // const dispatch = useDispatch();
+  // const allMissions = useSelector((state) => state.components.entities);
+
+  // useEffect(() => {
+  //   if (allMissions.length === 0) {
+  //     dispatch(fetchAllMissions());
+  //   }
+  // }, [dispatch]);
+
+  const createMissions = (list) => list.map((mission) => (
+    <Mission
+      key={mission.mission_id}
+      id={mission.mission_id}
+      name={mission.mission_name}
+      description={mission.description}
+      joined={mission.reserved}
+    />
+  ));
+
+  return (
+    <>
+      {allItems
+      && (
+      <motion.table
+        className={styles.mainContainer}
+        variants={container}
+        initial="initial"
+        animate="animate"
+      >
+        <tr className={styles.headers}>
+          <th>Mission</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th> </th>
+        </tr>
+        {createMissions(allItems)}
+      </motion.table>
+      )}
+    </>
+  );
+};
+
+export default MissionContainer;
