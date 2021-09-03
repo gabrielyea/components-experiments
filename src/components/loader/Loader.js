@@ -13,7 +13,7 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      duration: 2,
+      duration: 0.5,
       ease: [0.83, 0, 0.17, 1],
     },
   },
@@ -46,19 +46,17 @@ const ballVariants = {
     x: -75,
   },
 };
-const Loader = (props) => {
-  const { component } = props;
-  const dispatch = useDispatch();
-  const loadingState = useSelector((state) => state.components.loading);
-
+const Loader = ({
+  children, loading, callDispatch, list,
+}) => {
   useEffect(() => {
-    dispatch(fetchAllMissions());
+    callDispatch();
   }, []);
 
   return (
     <>
       <AnimatePresence>
-        {loadingState === 'pending' ? (
+        {loading === 'pending' && list.length === 0 ? (
           <motion.div
             key="loader"
             className={styles.mainContainer}
@@ -84,7 +82,7 @@ const Loader = (props) => {
             initial="hidden"
             animate="show"
           >
-            {component}
+            {children}
           </motion.div>
         )}
       </AnimatePresence>
