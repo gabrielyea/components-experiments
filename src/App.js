@@ -8,7 +8,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Loader />
+        <Loader
+          component={<MissionContainer />}
+        />
       </div>
     </Provider>
   );

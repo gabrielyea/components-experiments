@@ -17,10 +17,9 @@ const container = {
   },
 };
 
-const MissionContainer = (props) => {
-  const { allItems } = props;
+const MissionContainer = () => {
   // const dispatch = useDispatch();
-  // const allMissions = useSelector((state) => state.components.entities);
+  const allMissions = useSelector((state) => state.components.entities);
 
   // useEffect(() => {
   //   if (allMissions.length === 0) {
@@ -40,7 +39,7 @@ const MissionContainer = (props) => {
 
   return (
     <>
-      {allItems
+      {allMissions
       && (
       <motion.table
         className={styles.mainContainer}
@@ -54,7 +53,7 @@ const MissionContainer = (props) => {
           <th>Status</th>
           <th> </th>
         </tr>
-        {createMissions(allItems)}
+        {createMissions(allMissions)}
       </motion.table>
       )}
     </>
