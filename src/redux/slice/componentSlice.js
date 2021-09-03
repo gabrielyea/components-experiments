@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setLoading } from './loaderSlice';
 
 export const fetchAllMissions = createAsyncThunk('missions/fetchAllMissions', async () => {
   const response = await axios.get('https://api.spacexdata.com/v3/missions');
