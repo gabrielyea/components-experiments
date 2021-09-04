@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { motion } from 'framer-motion';
+import {
+  AnimatePresence, AnimateSharedLayout, motion, useCycle,
+} from 'framer-motion';
 import { reserve } from '../../../redux/slice/rocketsSlice';
 import style from './rocket.module.scss';
 
@@ -15,8 +19,10 @@ const variants = {
 };
 
 const Rocket = ({
-  id, name, description, image, reserved,
+  id, name, description, image, reserved, click, displayInfo,
 }) => {
+  const [open, toggleOpen] = useCycle(true, false);
+
   const dispatch = useDispatch();
 
   const reservedSpan = <span>Reserved</span>;
@@ -38,27 +44,71 @@ const Rocket = ({
     }
   }, [reserved]);
 
-  return (
+  const createContent = () => (
     <motion.div
-      className={style.container}
-      variants={variants}
+      layout
+      initial={{ opacity: 0, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 1 }}
     >
-      <img src={image} alt={name} />
-      <div>
-        <h2>{name}</h2>
-        <p>
-          {reservedTag}
-          {description}
-        </p>
-        <button
-          type="button"
-          className={reservedClass}
-          onClick={() => handleClick(id)}
-        >
-          {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
-        </button>
-      </div>
+      <h2>{name}</h2>
+      <p>
+        {reservedTag}
+        {description}
+      </p>
+      <button
+        type="button"
+        className={reservedClass}
+        onClick={() => handleClick(id)}
+      >
+        {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
+      </button>
     </motion.div>
+  );
+
+  return (
+    <motion.li
+      layoutId={id}
+      className={style.item}
+      variants={variants}
+      layout
+      onClick={() => {
+        click();
+      }}
+    >
+      <h2>{name}</h2>
+      { displayInfo && (
+        <AnimateSharedLayout>
+          <AnimatePresence>
+            <motion.div
+              key={id}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.img
+                key={id}
+                src={image}
+                alt={name}
+              />
+              <h2>{name}</h2>
+              <p>
+                {reservedTag}
+                {description}
+              </p>
+              <button
+                type="button"
+                className={reservedClass}
+                onClick={() => handleClick(id)}
+              >
+                {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
+              </button>
+            </motion.div>
+          </AnimatePresence>
+        </AnimateSharedLayout>
+      )}
+    </motion.li>
   );
 };
 
