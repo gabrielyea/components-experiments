@@ -1,7 +1,5 @@
-import { motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllRockets } from '../../../redux/slice/rocketsSlice';
+import { motion, AnimateSharedLayout } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
 import Rocket from '../rocket/Rocket';
 
@@ -25,14 +23,7 @@ const container = {
 };
 
 const RocketContainer = () => {
-  const dispatch = useDispatch();
   const allRockets = useSelector((state) => state.rockets.entities);
-
-  useEffect(() => {
-    if (allRockets.length === 0) {
-      dispatch(fetchAllRockets());
-    }
-  }, [dispatch]);
 
   const createRockets = () => allRockets.map((rocket) => (
     <Rocket
@@ -49,13 +40,15 @@ const RocketContainer = () => {
     <>
       {allRockets
       && (
-      <motion.div
-        variants={container}
-        initial="initial"
-        animate={allRockets.length > 0 ? 'animate' : 'loading'}
-      >
-        {createRockets()}
-      </motion.div>
+        <AnimateSharedLayout>
+          <motion.div
+            variants={container}
+            initial="initial"
+            animate={allRockets.length > 0 ? 'animate' : 'loading'}
+          >
+            {createRockets()}
+          </motion.div>
+        </AnimateSharedLayout>
       )}
     </>
   );

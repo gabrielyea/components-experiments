@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import MissionContainer from '../components/missions/missionContainer/MissionContainer';
 import Loader from '../components/loader/Loader';
 import { fetchAllMissions } from '../redux/slice/componentSlice';

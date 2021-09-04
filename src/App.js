@@ -14,7 +14,7 @@ import store from './redux/configureStore';
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Navbar />
         <div className="main">
           <Switch>
