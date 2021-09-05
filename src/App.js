@@ -29,9 +29,9 @@ function App() {
             <Route exact path="/">
               <Rockets />
             </Route>
-            <Route path="*">
-              <NoMatch />
-            </Route>
+            // <Route path="*">
+             // <NoMatch />
+            // </Route>
           </Switch>
         </div>
       </Router>
