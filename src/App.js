@@ -20,9 +20,6 @@ function App() {
         <Navbar />
         <div className="main">
           <Switch>
-            <Route path="*">
-              <NoMatch />
-            </Route>
             <Route path="/missions">
               <Missions />
             </Route>
@@ -31,6 +28,9 @@ function App() {
             </Route>
             <Route exact path="/">
               <Rockets />
+            </Route>
+            <Route path="*">
+              <NoMatch />
             </Route>
           </Switch>
         </div>
