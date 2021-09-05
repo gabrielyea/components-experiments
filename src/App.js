@@ -32,6 +32,9 @@ function App() {
             <Route path="*">
               <NoMatch />
             </Route>
+            <Route path="/*">
+              <NoMatch />
+            </Route>
           </Switch>
         </div>
       </Router>
