@@ -32,6 +32,11 @@ const Navbar = () => {
       path: '/missions',
       text: 'Missions',
     },
+    {
+      id: 3,
+      path: '/list',
+      text: 'List',
+    },
   ];
 
   const linksList = links.map((link) => (

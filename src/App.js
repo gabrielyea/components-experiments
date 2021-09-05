@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 import Navbar from './components/shared/navbar/Navbar';
 import Missions from './pages/Missions';
+import List from './pages/List';
 import Rockets from './pages/Rockets';
 import store from './redux/configureStore';
 
@@ -20,6 +21,9 @@ function App() {
           <Switch>
             <Route path="/missions">
               <Missions />
+            </Route>
+            <Route path="/list">
+              <List />
             </Route>
             <Route exact path="/">
               <Rockets />

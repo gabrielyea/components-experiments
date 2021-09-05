@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { fetchAllMissions } from '../../../redux/slice/componentSlice';
-import { setLoading } from '../../../redux/slice/loaderSlice';
 import Mission from '../mission/Mission';
 import styles from './missionContainerStyle.module.scss';
 
@@ -18,7 +15,7 @@ const container = {
   },
 };
 
-const MissionContainer = ({ toggle }) => {
+const MissionContainer = () => {
   const allMissions = useSelector((state) => state.components.entities);
 
   const createMissions = (list) => list.map((mission) => (
