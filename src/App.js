@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+
+import { Provider } from 'react-redux';
+
+import Navbar from './components/shared/navbar/Navbar';
+import Missions from './pages/Missions';
+import List from './pages/List';
+import Rockets from './pages/Rockets';
+import NoMatch from './pages/NoMatch';
+import store from './redux/configureStore';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router basename={process.env.PUBLIC_URL}>
+        <Navbar />
+        <div className="main">
+          <Switch>
+            <Route path="/missions">
+              <Missions />
+            </Route>
+            <Route path="/list">
+              <List />
+            </Route>
+            <Route exact path="/">
+              <Rockets />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
