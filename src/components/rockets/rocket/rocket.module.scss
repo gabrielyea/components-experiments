@@ -4,8 +4,10 @@
   cursor: pointer;
   margin: 20px 0 0 20px;
   flex: 1 1;
-  background-color: #0290ff;
+  background-color: white;
   list-style: none;
+  display: flex;
+  flex-direction: column;
 
   img {
     max-width: 100%;

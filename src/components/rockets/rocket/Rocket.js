@@ -19,18 +19,20 @@ const variants = {
 };
 
 const Rocket = ({
-  id, name, description, image, reserved, click, displayInfo,
+  id, name, description, image, reserved, click,
 }) => {
   const [open, toggleOpen] = useCycle(true, false);
 
   const dispatch = useDispatch();
 
-  const reservedSpan = <span>Reserved</span>;
+  const reservedSpan = <span style={{ backgroundColor: '#0290ff', color: 'white' }}>Reserved</span>;
 
   const [reservedTag, setReservedTag] = useState(null);
   const [reservedClass, setReservedClass] = useState(style.notReserved);
 
   const handleClick = (idRocket) => {
+    setReservedTag(reservedSpan);
+    setReservedClass(style.reserved);
     dispatch(reserve(idRocket));
   };
 
@@ -44,71 +46,43 @@ const Rocket = ({
     }
   }, [reserved]);
 
-  const createContent = () => (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 1 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 1 }}
-    >
-      <h2>{name}</h2>
-      <p>
-        {reservedTag}
-        {description}
-      </p>
-      <button
-        type="button"
-        className={reservedClass}
-        onClick={() => handleClick(id)}
-      >
-        {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
-      </button>
-    </motion.div>
-  );
-
   return (
-    <motion.li
-      layoutId={id}
-      className={style.item}
-      variants={variants}
-      layout
-      onClick={() => {
-        click();
-      }}
-    >
-      <h2>{name}</h2>
-      { displayInfo && (
-        <AnimateSharedLayout>
-          <AnimatePresence>
-            <motion.div
-              key={id}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <motion.img
-                key={id}
-                src={image}
-                alt={name}
-              />
-              <h2>{name}</h2>
-              <p>
-                {reservedTag}
-                {description}
-              </p>
-              <button
-                type="button"
-                className={reservedClass}
-                onClick={() => handleClick(id)}
-              >
-                {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
-              </button>
-            </motion.div>
-          </AnimatePresence>
-        </AnimateSharedLayout>
-      )}
-    </motion.li>
+    <AnimatePresence>
+      <motion.li
+        key={id}
+        layoutId={id}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={style.item}
+      >
+        <h2>{name}</h2>
+        <img
+          key={id}
+          src={image}
+          alt={name}
+        />
+        <h2>{name}</h2>
+        <p>
+          {reservedTag}
+          {description}
+        </p>
+        <button
+          type="button"
+          className={reservedClass}
+          onClick={() => handleClick(id)}
+        >
+          {reserved ? 'Cancel Reservation' : 'Reserve Rocket'}
+        </button>
+        <button
+          type="button"
+          style={{ backgroundColor: '#c2c2c2', color: 'white', borderStyle: 'none' }}
+          onClick={() => click()}
+        >
+          Close
+        </button>
+      </motion.li>
+    </AnimatePresence>
   );
 };
 

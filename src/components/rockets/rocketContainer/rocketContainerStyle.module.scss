@@ -1,15 +1,14 @@
 .mainContainer {
-  background-color: black;
+  background-color: rgb(194, 194, 194);
   border-radius: 25px;
-  margin: 0;
+  margin: 1em;
   padding: 0 20px 20px 0;
-  // display: flex;
-  // flex-wrap: wrap;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   list-style: none;
+  height: 90vh;
 }
 
 .overlay {
@@ -20,7 +19,6 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -1;
 }
 
 .singleItemContainer {
@@ -32,10 +30,42 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
+}
+
+.singleItemContainer * {
+  pointer-events: all;
 }
 
 .singleItem {
   border-radius: 20px;
-  width: 500px;
-  height: 500px;
+  width: 800px;
+  height: 800px;
+}
+
+.avatar {
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  margin: 20px 0 0 20px;
+  flex: 1 1;
+  background-color: #444857;
+  list-style: none;
+  justify-self: center;
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
+  gap: 1em;
+  box-shadow: grey 4px 4px 4px;
+
+  img {
+    border-radius: 100%;
+    width: 100px;
+  }
+
+  h2 {
+    color: white;
+    font-size: 3vw;
+  }
 }
