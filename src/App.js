@@ -10,6 +10,7 @@ import Navbar from './components/shared/navbar/Navbar';
 import Missions from './pages/Missions';
 import List from './pages/List';
 import Rockets from './pages/Rockets';
+import NoMatch from './pages/NoMatch';
 import store from './redux/configureStore';
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
         <Navbar />
         <div className="main">
           <Switch>
+            <Route path="*">
+              <NoMatch />
+            </Route>
             <Route path="/missions">
               <Missions />
             </Route>
